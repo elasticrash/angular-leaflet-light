@@ -129,3 +129,9 @@ You can also access the map using the service:
 
 	leafletService.data.mymap;
 
+This version can also give you a promise of a map using the service:
+
+	leafletService.data.mymap.promise;
+	
+	leafletService.data.mymap.promise().then(function (map) {
+	});

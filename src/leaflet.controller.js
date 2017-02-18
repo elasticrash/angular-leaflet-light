@@ -9,7 +9,7 @@ class LeafletCtrl {
      * @param {Object} $element angular $element
      * @param {Object} leafletService local service
      */
-    constructor($element, leafletService) {
+    constructor($element, $q, leafletService) {
         this.$element = $element;
         this.leafletService = leafletService;
     }
@@ -22,15 +22,18 @@ class LeafletCtrl {
         div.attr('style', this.$element.attr('style'));
         div.attr('class', this.$element.attr('class'));
         this.container = div[0];
+
+        this.leafletService.data[this.mapid] = $q.defer();
+        this.leafletService.data[this.mapid].promise = this.leafletService.data[this.mapid].promise;
     }
     $postLink() {
         if (!L.Icon.Default.imagePath && this.leafletService.settings.imagePath) {
             L.Icon.Default.imagePath = this.leafletService.settings.imagePath;
         }
         var map = L.map(this.container);
-        this.leafletService.data[this.mapid] = map;
+        this.leafletService.data[this.mapid].resolve(map);
         this.leafletService.updateMapFromSettings(map);
-        this.onMapInitialized({map: map});
+        this.onMapInitialized({ map: map });
         this.map = map;
     }
     $onChanges(changesObj) {
