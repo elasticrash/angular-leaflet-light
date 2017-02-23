@@ -23,15 +23,15 @@ class LeafletCtrl {
         div.attr('class', this.$element.attr('class'));
         this.container = div[0];
 
-        this.leafletService.data[this.mapid] = $q.defer();
-        this.leafletService.data[this.mapid].promise = this.leafletService.data[this.mapid].promise;
+        this.leafletService.data[this.mapid].map = $q.defer();
+        this.leafletService.data[this.mapid].promise = this.leafletService.data[this.mapid].map.promise;
     }
     $postLink() {
         if (!L.Icon.Default.imagePath && this.leafletService.settings.imagePath) {
             L.Icon.Default.imagePath = this.leafletService.settings.imagePath;
         }
         var map = L.map(this.container);
-        this.leafletService.data[this.mapid].resolve(map);
+        this.leafletService.data[this.mapid].map.resolve(map);
         this.leafletService.updateMapFromSettings(map);
         this.onMapInitialized({ map: map });
         this.map = map;

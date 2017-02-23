@@ -18,8 +18,8 @@ ngDescribe({
         });
         it('should attach map instance to the service', function () {
             var controller = deps.element.isolateScope().$ctrl;
-            expect(deps.leafletService.data.map).not.toBeUndefined();
-            expect(deps.leafletService.data.map._container).toBe(controller.container);
+            expect(deps.leafletService.data.map.map).not.toBeUndefined();
+            expect(deps.leafletService.data.map.map._container).toBe(controller.container);
         });
         it('should have set L.Icon.Default.imagePath', function () {
             expect(L.Icon.Default.imagePath).toContain('node_modules/leaflet/dist/images');
