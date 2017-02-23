@@ -23,6 +23,7 @@ class LeafletCtrl {
         div.attr('class', this.$element.attr('class'));
         this.container = div[0];
 
+        this.leafletService.data[this.mapid] = {};
         this.leafletService.data[this.mapid].map = $q.defer();
         this.leafletService.data[this.mapid].promise = this.leafletService.data[this.mapid].map.promise;
     }
